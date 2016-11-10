@@ -11,9 +11,15 @@ A post has a title and when a post is tapped, you should go to the detail screen
 
 # Detail screen
 A post detail screen has
+
 Its author.
+
 A description. 
+
 Number of comments it has.
+
 Online / Offline Mode
 The information (posts and post details) are available offline. It's assumed that if it's the first time you are accessing the app, and you are offline, you shouldn't see anything.
+
+App uses cocoa pods, Alamofire library and Realm Framework. 
 
