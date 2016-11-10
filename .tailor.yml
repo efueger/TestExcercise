@@ -1,0 +1,6 @@
+
+exclude:
+ - Pods
+
+except:
+ - trailing-whitespace
