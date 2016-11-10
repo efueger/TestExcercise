@@ -12,6 +12,7 @@ import Alamofire
 final class ReachabilityManager: NSObject {
   var isNetworkReachable: Bool = false
   var reachabilityManager: NetworkReachabilityManager?
+  var hostName = "www.apple.com" // should be injected from endpoint api, for demo purpose it is hardcoded
 
   static let sharedInstance: ReachabilityManager = {
     let instance = ReachabilityManager()
@@ -24,7 +25,7 @@ final class ReachabilityManager: NSObject {
   }
   
   func startReachabilityObserver() {
-    self.reachabilityManager = NetworkReachabilityManager(host: "www.apple.com")
+    self.reachabilityManager = NetworkReachabilityManager(host: self.hostName)
     reachabilityManager?.listener = { status in
       print("Network Status Changed: \(status)")
       switch status {

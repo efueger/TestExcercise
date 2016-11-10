@@ -22,9 +22,13 @@ class APIHelper {
     return instance
   }()
   
-  func getAllPosts(completion: (_ postList: [Post]) -> Void) -> Void {
+  func getAllPosts(completion: (_ postList: [Post], _ error: Error?) -> Void) -> Void {
     let posts: [Post] = dbManager.getAllPosts()
-    completion(posts)
+    if posts.count == 0 && SyncEngine.sharedInstance.syncError != nil {
+       completion(posts, SyncEngine.sharedInstance.syncError)
+    }else {
+      completion(posts, nil)
+    }
   }
   
   func getAllCommentsForPostID(postID: Int) -> [Comment] {

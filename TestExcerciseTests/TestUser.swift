@@ -32,5 +32,4 @@ class TestUser: XCTestCase {
       XCTAssertEqual(user.count, 0)
     }
   }
-  
 }

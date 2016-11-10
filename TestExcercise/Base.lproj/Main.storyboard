@@ -27,13 +27,13 @@
                                         <rect key="frame" x="0.0" y="1" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VGL-mY-1qi" id="NGm-D0-JEp">
-                                            <frame key="frameInset" width="342" height="43"/>
+                                            <frame key="frameInset" width="342" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="SKM-iL-jFt" kind="showDetail" identifier="detail" id="CFe-F0-yze"/>
+                                            <segue destination="69d-en-TLR" kind="show" id="tKS-60-paU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -94,9 +94,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtX-SQ-9bn">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="YcO-nE-rtS"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -105,10 +102,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" rowHeight="81" id="G2j-VM-AFV" customClass="CommentTableViewCell" customModule="TestExcercise" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="343" height="81"/>
+                                                <rect key="frame" x="0.0" y="28" width="1000" height="81"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G2j-VM-AFV" id="j8D-kb-qKk">
-                                                    <frame key="frameInset" width="343" height="80"/>
+                                                    <frame key="frameInset" width="1000" height="81"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="240" misplaced="YES" text="Label" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09z-bO-ayw">
@@ -174,13 +171,6 @@
                             <constraint firstItem="PiK-Xt-A7F" firstAttribute="top" secondItem="z3o-Ph-WlF" secondAttribute="bottom" id="iZC-Fm-Mf4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="lbc-K4-K6d">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="oqD-uj-VIV">
-                            <connections>
-                                <segue destination="TyY-fN-EhN" kind="show" id="qJH-zV-bPI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="lblAuthorOfPost" destination="UZ3-fN-MAT" id="qqR-pt-l4D"/>
                         <outlet property="lblCommentsTitle" destination="vtX-SQ-9bn" id="y3q-qT-WCN"/>
@@ -191,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCx-tF-K2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3552.1739130434785" y="103.53260869565219"/>
+            <point key="canvasLocation" x="1858" y="103"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="muA-iH-mU0">
@@ -204,31 +194,14 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
+                        <outlet property="delegate" destination="E98-VO-Roy" id="UuB-TG-npX"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tui-0e-y8V"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xJ-ev-deU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="E98-VO-Roy" customClass="NavigationControllerDelegate" customModule="TestExcercise" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="136.23188405797103" y="103.53260869565219"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="V6q-FZ-GSf">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SKM-iL-jFt" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Toy-rZ-Gdz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="69d-en-TLR" kind="relationship" relationship="rootViewController" id="guu-hd-pAa"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tBn-LP-YZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationItem title="Title" id="T1N-bf-6HF"/>
-            </objects>
-            <point key="canvasLocation" x="2644.9275362318845" y="103.53260869565219"/>
         </scene>
     </scenes>
 </document>

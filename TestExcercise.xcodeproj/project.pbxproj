@@ -28,6 +28,7 @@
 		9252CD641DC3302C0000ED36 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252CD611DC3302C0000ED36 /* NotificationExtension.swift */; };
 		9252CD6E1DC343E10000ED36 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252CD6D1DC343E10000ED36 /* CommentTableViewCell.swift */; };
 		9252CD701DC343E10000ED36 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252CD6D1DC343E10000ED36 /* CommentTableViewCell.swift */; };
+		92724E691DC4B9A5006B622D /* .tailor.yml in Resources */ = {isa = PBXBuildFile; fileRef = 92724E681DC4B9A5006B622D /* .tailor.yml */; };
 		9274B9351DC1592100447F2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274B9341DC1592100447F2F /* AppDelegate.swift */; };
 		9274B9371DC1592100447F2F /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274B9361DC1592100447F2F /* PostListViewController.swift */; };
 		9274B93A1DC1592100447F2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9274B9381DC1592100447F2F /* Main.storyboard */; };
@@ -39,6 +40,8 @@
 		92B75B5E1DC1987D0094C58F /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92B75B5B1DC1987D0094C58F /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92B75B5F1DC1987D0094C58F /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B75B5C1DC1987D0094C58F /* RealmSwift.framework */; };
 		92B75B601DC1987D0094C58F /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92B75B5C1DC1987D0094C58F /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		92DB934A1DD14D1600C9F125 /* CustomNavigationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB93491DD14D1600C9F125 /* CustomNavigationAnimationController.swift */; };
+		92DB934C1DD2859B00C9F125 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB934B1DD2859B00C9F125 /* NavigationControllerDelegate.swift */; };
 		EF44D00B59E32B76675E9483 /* Pods_TestExcerciseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B7CF035864673A980104A4 /* Pods_TestExcerciseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +98,7 @@
 		9252CD5D1DC296E70000ED36 /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostDetailViewController.swift; path = ../PostDetailViewController.swift; sourceTree = "<group>"; };
 		9252CD611DC3302C0000ED36 /* NotificationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		9252CD6D1DC343E10000ED36 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentTableViewCell.swift; path = ../CommentTableViewCell.swift; sourceTree = "<group>"; };
+		92724E681DC4B9A5006B622D /* .tailor.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .tailor.yml; sourceTree = "<group>"; };
 		9274B9311DC1592100447F2F /* TestExcercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestExcercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9274B9341DC1592100447F2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9274B9361DC1592100447F2F /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 		92B75B511DC196120094C58F /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		92B75B5B1DC1987D0094C58F /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		92B75B5C1DC1987D0094C58F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		92DB93491DD14D1600C9F125 /* CustomNavigationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationAnimationController.swift; sourceTree = "<group>"; };
+		92DB934B1DD2859B00C9F125 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		ACB153312AD07453C180FBEF /* Pods-TestExcerciseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestExcerciseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestExcerciseUITests/Pods-TestExcerciseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DA4FFC88B1BCE6DA7D950FC0 /* Pods_TestExcerciseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestExcerciseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB95B598593AB090B9F7280C /* Pods-TestExcercise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestExcercise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestExcercise/Pods-TestExcercise.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 			children = (
 				9274B9361DC1592100447F2F /* PostListViewController.swift */,
 				9252CD5D1DC296E70000ED36 /* PostDetailViewController.swift */,
+				92DB934B1DD2859B00C9F125 /* NavigationControllerDelegate.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -204,6 +211,7 @@
 		9274B9281DC1592100447F2F = {
 			isa = PBXGroup;
 			children = (
+				92724E681DC4B9A5006B622D /* .tailor.yml */,
 				9274B9331DC1592100447F2F /* TestExcercise */,
 				9274B94B1DC1592200447F2F /* TestExcerciseTests */,
 				9274B9561DC1592200447F2F /* TestExcerciseUITests */,
@@ -226,16 +234,17 @@
 		9274B9331DC1592100447F2F /* TestExcercise */ = {
 			isa = PBXGroup;
 			children = (
+				92DB93481DD14C9F00C9F125 /* CustomAnimation */,
 				92267EAB1DC667BE002EE91A /* CustomCells */,
 				9252CD711DC343EF0000ED36 /* Controllers */,
 				922C18D21DC1A44A00AEAD52 /* Managers */,
 				9274B9651DC15E7A00447F2F /* Model */,
 				9274B9341DC1592100447F2F /* AppDelegate.swift */,
 				9274B9381DC1592100447F2F /* Main.storyboard */,
+				9252CD611DC3302C0000ED36 /* NotificationExtension.swift */,
 				9274B93E1DC1592100447F2F /* Assets.xcassets */,
 				9274B9401DC1592100447F2F /* LaunchScreen.storyboard */,
 				9274B9431DC1592100447F2F /* Info.plist */,
-				9252CD611DC3302C0000ED36 /* NotificationExtension.swift */,
 			);
 			path = TestExcercise;
 			sourceTree = "<group>";
@@ -273,6 +282,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		92DB93481DD14C9F00C9F125 /* CustomAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				92DB93491DD14D1600C9F125 /* CustomNavigationAnimationController.swift */,
+			);
+			name = CustomAnimation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -288,6 +305,7 @@
 				5A5B1636F0EE30F1B376DA9B /* [CP] Copy Pods Resources */,
 				92B75B551DC197900094C58F /* ShellScript */,
 				92B75B581DC198530094C58F /* Embed Frameworks */,
+				B379A5DB4051387A0120F2DF /* Tailor */,
 			);
 			buildRules = (
 			);
@@ -391,6 +409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92724E691DC4B9A5006B622D /* .tailor.yml in Resources */,
 				9274B9421DC1592100447F2F /* LaunchScreen.storyboard in Resources */,
 				9274B93F1DC1592100447F2F /* Assets.xcassets in Resources */,
 				9274B93A1DC1592100447F2F /* Main.storyboard in Resources */,
@@ -517,7 +536,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "if which taylor >/dev/null; then\ntaylor -p ${PROJECT_DIR} -r xcode\nelse\necho \"Taylor not installed\"\nfi";
+		};
+		B379A5DB4051387A0120F2DF /* Tailor */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Tailor;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if hash tailor 2>/dev/null; then\n  tailor\nelse\n  echo \"warning: Please install Tailor from https://tailor.sh\"\nfi";
 		};
 		C7595847E8311C07DB5415DA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -570,6 +603,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92267EAD1DC6B8BD002EE91A /* ReachabilityManager.swift in Sources */,
+				92DB934A1DD14D1600C9F125 /* CustomNavigationAnimationController.swift in Sources */,
 				922C18D01DC1A32100AEAD52 /* Comment.swift in Sources */,
 				9252CD621DC3302C0000ED36 /* NotificationExtension.swift in Sources */,
 				922C18CD1DC19FDF00AEAD52 /* User.swift in Sources */,
@@ -582,6 +616,7 @@
 				9252CD5E1DC296E70000ED36 /* PostDetailViewController.swift in Sources */,
 				9274B9351DC1592100447F2F /* AppDelegate.swift in Sources */,
 				922C18DD1DC1AFC300AEAD52 /* SyncEngine.swift in Sources */,
+				92DB934C1DD2859B00C9F125 /* NavigationControllerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,15 +50,19 @@ class DBManager {
     }
   }
   
-  func saveJsonDataRecordsToDB(jsonRecords: [Object]) -> Bool {
-    let realm = try! Realm()
-   realm.beginWrite()
-      for record in jsonRecords {
-        realm.add(record, update: true)
+  func saveJsonDataRecordsToDB(jsonRecords: [Object], success: () -> Void, fail: (NSError) -> Void) -> Void {
+    do {
+      let realm = try Realm()
+        realm.beginWrite()
+        for record in jsonRecords {
+          realm.add(record, update: true)
+        }
+      try realm.commitWrite()
+      } catch let error as NSError {
+        print("Something went wrong!")
+        fail(error)
+        // use the error object such as error.localizedDescription
       }
-    try! realm.commitWrite()
-    return true
-  }
-  
-  
+    success()
+    }
 }

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
+import RealmSwift
 
 final class SyncEngine: NSObject {
   
@@ -17,6 +18,9 @@ final class SyncEngine: NSObject {
   var isPostSynchSuccessful: Bool = false
   var isUSerSynchSuccessful: Bool = false
   var isCommentSynchSuccessful: Bool = false
+  var syncError: Error?
+  var registeredClassesToSync = [String]()
+  var moduleName = "TestExcercise."
   
   private let dbManager: DBManager
   private let networkManager: NetworkManager
@@ -31,6 +35,10 @@ final class SyncEngine: NSObject {
     
     dbManager = DBManager()
     networkManager = NetworkManager()
+    registeredClassesToSync.append(Post.className())
+    registeredClassesToSync.append(Comment.className())
+    registeredClassesToSync.append(User.className())
+    
     super.init()
     ReachabilityManager.sharedInstance.startReachabilityObserver()
     NotificationCenter.default.addObserver(self, selector: #selector(executeNetworkbecomesReachableOperations), name: .networkIsReachable, object: nil)
@@ -53,59 +61,87 @@ final class SyncEngine: NSObject {
     if isSyncInProgress {
       return
     }
-      self.willChangeValue(forKey: "isSyncInProgress")
-      isSyncInProgress = true
-      self.didChangeValue(forKey: "isSyncInProgress")
-      DispatchQueue.global(qos: .background).async {
-        self.downloadDataForObjects(useUpadatedAtDate: false)
-      }
+    self.willChangeValue(forKey: "isSyncInProgress")
+    isSyncInProgress = true
+    self.didChangeValue(forKey: "isSyncInProgress")
+    self.willChangeValue(forKey: "syncError")
+    self.syncError = nil
+    self.didChangeValue(forKey: "syncError")
+    DispatchQueue.global(qos: .background).async {
+      self.downloadDataForObjects(useUpadatedAtDate: false)
     }
+  }
   
-  func executeSyncCompletedOperation() -> Void {
+  func executeSyncCompletedSuccessfully() -> Void {
     DispatchQueue.main.async {
       self.setInitialSyncCompleted()
-      NotificationCenter.default.post(name: .dbSyncCompleted, object: nil)
       self.willChangeValue(forKey: "isSyncInProgress")
       self.isSyncInProgress = false
       self.didChangeValue(forKey: "isSyncInProgress")
+      NotificationCenter.default.post(name: .dbSyncCompleted, object: nil)
+      self.syncError = nil
     }
   }
   
   func downloadDataForObjects(useUpadatedAtDate useUpdatedAtDate: Bool) -> Void {
-    networkManager.downloadRequestForClass(className: "Posts", completion: {[weak self] value in
-      if let parsedResponse = self?.processResponseFromServer(response: value) {
+    networkManager.downloadRequestForClass(className: "Post", completion: {[weak self](value, error) in
+      guard let responseJson = value else {
+        print(error)
+        self?.handleError(error: error!)
+        return
+      }
+      if let parsedResponse = self?.processResponseFromServer(response: responseJson) {
         let posts = Post.processJsonrecordsToArray(jsonRecords: parsedResponse)
-        self?.isPostSynchSuccessful = (self?.dbManager.saveJsonDataRecordsToDB(jsonRecords: posts))!
-        if !(self?.isPostSynchSuccessful)! {
-          print ("post Sync unsuccessful") // implement the code to retry After sometime
-        }
-        self?.downloadDataForComments()
+        self?.dbManager.saveJsonDataRecordsToDB(jsonRecords: posts, success: {
+          self?.downloadDataForComments()
+          }, fail: { (error) in
+            print ("post Sync unsuccessful with error: \(error.localizedDescription)") // implement the code to retry After sometime
+            self?.willChangeValue(forKey: "isSyncInProgress")
+            self?.isSyncInProgress = false
+            self?.didChangeValue(forKey: "isSyncInProgress")
+        })
       }
       })
   }
   
   func downloadDataForComments() -> Void {
-    networkManager.downloadRequestForClass(className: "Comments", completion: {[weak self] value in
-      if let parsedResponse = self?.processResponseFromServer(response: value) {
+    networkManager.downloadRequestForClass(className: "Comment", completion: {[weak self] (value, error) in
+      guard let responseJson = value else {
+        print(error)
+        self?.handleError(error: error!)
+        return
+      }
+      if let parsedResponse = self?.processResponseFromServer(response: responseJson) {
         let comments = Comment.processJsonrecordsToArray(jsonRecords: parsedResponse)
-        self?.isCommentSynchSuccessful =  self!.dbManager.saveJsonDataRecordsToDB(jsonRecords: comments)
-        if !(self?.isCommentSynchSuccessful)! {
-          print ("comments Sync unsuccessful") // implement the code to retry After sometime
-        }
-        self?.downloadDataForUsers()
+        self!.dbManager.saveJsonDataRecordsToDB(jsonRecords: comments, success: {
+          self?.downloadDataForUsers()
+          }, fail: { (error) in
+            print ("comment Sync unsuccessful with error: \(error.localizedDescription)") // implement the code to retry After sometime
+            self?.willChangeValue(forKey: "isSyncInProgress")
+            self?.isSyncInProgress = false
+            self?.didChangeValue(forKey: "isSyncInProgress")
+        })
       }
       })
   }
   
   func downloadDataForUsers() -> Void {
-    networkManager.downloadRequestForClass(className: "Users", completion: {[weak self] value in
-      if let parsedResponse = self?.processResponseFromServer(response: value) {
+    networkManager.downloadRequestForClass(className: "User", completion: {[weak self] (value, error) in
+      guard let responseJson = value else {
+        print(error)
+        self?.handleError(error: error!)
+        return
+      }
+      if let parsedResponse = self?.processResponseFromServer(response: responseJson) {
         let users = User.processJsonrecordsToArray(jsonRecords: parsedResponse)
-        self?.isUSerSynchSuccessful =  self!.dbManager.saveJsonDataRecordsToDB(jsonRecords: users)
-        if !(self?.isUSerSynchSuccessful)! {
-          print ("User Sync unsuccessful") // implement the code to retry After sometime
-        }
-        self?.executeSyncCompletedOperation()
+        self!.dbManager.saveJsonDataRecordsToDB(jsonRecords: users,success: {
+          self?.executeSyncCompletedSuccessfully()
+          }, fail: { (error) in
+            print ("User Sync unsuccessful with error: \(error.localizedDescription)") // implement the code to retry After sometime
+            self?.willChangeValue(forKey: "isSyncInProgress")
+            self?.isSyncInProgress = false
+            self?.didChangeValue(forKey: "isSyncInProgress")
+        })
       }
       })
   }
@@ -113,10 +149,21 @@ final class SyncEngine: NSObject {
   func processResponseFromServer(response: Any) -> [[String: AnyObject]]? {
     guard let initialJsonObject = JSON(response).arrayObject, let arrayParsedFromJson = initialJsonObject as? [[String: AnyObject]] else {
       print("Malformed data")
-      self.executeSyncCompletedOperation()
       return  nil
     }
     return arrayParsedFromJson
+  }
+  
+  func handleError(error: Error) {
+    if (error as NSError).code == -1009  && self.initialSyncComplete() == false {
+      DispatchQueue.main.async {
+        self.willChangeValue(forKey: "isSyncInProgress")
+        self.isSyncInProgress = false
+        self.didChangeValue(forKey: "isSyncInProgress")
+        self.syncError = error
+        NotificationCenter.default.post(name: .dbSyncCompleted, object: nil)
+      }
+    }
   }
   
 }

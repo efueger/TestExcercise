@@ -8,26 +8,30 @@
 
 import UIKit
 
-class PostListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PostListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
   
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var table: UITableView!
   
   let apiHelperInstance = APIHelper.sharedInstance
   var postLists: Array? = []
-  
+  let customNavigationAnimationController = CustomNavigationAnimationController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.updateControllerWithPosts()
+    self.table.dataSource = self
+    self.table.delegate = self
+    self.loadPosts()
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    NotificationCenter.default.addObserver(self, selector: #selector(self.updateControllerWithPosts), name: .dbSyncCompleted, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadPosts), name: .dbSyncCompleted, object: nil)
+    SyncEngine.sharedInstance.addObserver(self, forKeyPath: "isSyncInProgress", options: .new, context: nil)
   }
   
   override func viewDidDisappear(_ animated: Bool) {
     NotificationCenter.default.removeObserver(self, name: .dbSyncCompleted, object: nil)
+    SyncEngine.sharedInstance.removeObserver(self, forKeyPath: "isSyncInProgress")
   }
   
   override func didReceiveMemoryWarning() {
@@ -35,35 +39,29 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
   }
   
   func loadPosts() {
-    apiHelperInstance.getAllPosts(completion: {[weak self] posts in
-      self?.postLists = posts
-      self?.updateViewWithPosts()
+    apiHelperInstance.getAllPosts(completion: {[weak self] (posts, error) in
+      if error != nil {
+        self?.executeUnreachableNetworkAndNoRecordsCase()
+      }else {
+        self?.postLists = posts
+        self?.table.reloadData()
+      }
+      self?.table.isHidden = posts.count == 0 ? true: false
       })
-  }
-  
-  func updateViewWithPosts() {
-    if (self.postLists?.count)! == 0 && !ReachabilityManager.sharedInstance.isNetworkReachable {
-      self.executeUnreachableNetworkAndNoRecordsCase()
-    } else {
-      self.table.dataSource = self
-      self.table.delegate = self
-      self.table.isHidden = false
-      self.table.reloadData()
-      self.activityIndicator.stopAnimating()
-    }
   }
   
   func executeUnreachableNetworkAndNoRecordsCase() {
     let alert = UIAlertController(title: "", message: "There are no post to show. Please try again!", preferredStyle: UIAlertControllerStyle.alert)
     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
     self.navigationController?.present(alert, animated: true, completion: nil)
-    self.table.isHidden = true
   }
-  
-  func updateControllerWithPosts() {
-    self.view.bringSubview(toFront: self.activityIndicator)
-    self.activityIndicator.startAnimating()
-    self.perform(#selector(loadPosts), with: nil, afterDelay: 0.1) // Putting this delay to give time to Reachability to respond.
+
+  func checkStatus() {
+    if SyncEngine.sharedInstance.isSyncInProgress {
+      self.activityIndicator.startAnimating()
+    }else {
+      self.activityIndicator.stopAnimating()
+    }
   }
   
   // Mark Table View
@@ -97,8 +95,17 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
         print("show alert post not detected")
         return
       }
-      let destinationNavigationController = segue.destination as! UINavigationController
-      (destinationNavigationController.topViewController as? PostDetailViewController)?.post = selectedPost
+//      let destinationNavigationController = segue.destination as! UINavigationController
+//      (destinationNavigationController.topViewController as? PostDetailViewController)?.post = selectedPost
+      let destinationNavigationController = segue.destination as! PostDetailViewController
+      destinationNavigationController.post = selectedPost
+//      self.navigationController?.pushViewController(destinationNavigationController, animated: true)
+    }
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    if keyPath == "isSyncInProgress" {
+      self.checkStatus()
     }
   }
   

@@ -13,22 +13,17 @@ class NetworkManager {
   
   let baseUrl = "http://jsonplaceholder.typicode.com/"
   
-  func downloadRequestForClass(className: String, completion: ((AnyObject?) -> ())?) {
-    let url = baseUrl + className
+  func downloadRequestForClass(className: String, completion: @escaping (AnyObject?, Error?) -> ()) -> Void {
+    let url = baseUrl + className.appending("s")
     
     Alamofire.request(url).validate()
       .responseJSON { (response) -> Void in
         guard response.result.isSuccess else {
           print("Error while fetching data: \(response.result.error)")
-          completion?(nil)
+          completion(nil, response.result.error)
           return
         }
-        guard let value = response.result.value  else {
-          print("Malformed data")
-          completion?(nil)
-          return
-        }
-        completion?(value as AnyObject?)
+        completion(response.result.value as AnyObject?, nil)
     }
   }
   
