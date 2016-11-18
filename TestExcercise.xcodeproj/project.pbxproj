@@ -168,7 +168,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		757A76A36AA017CA5F3AAC23 /* Frameworks */ = {
+		757A76A36AA017CA5F3AAC23 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
 				92B75B5B1DC1987D0094C58F /* Realm.framework */,
@@ -177,7 +177,7 @@
 				77B7CF035864673A980104A4 /* Pods_TestExcerciseTests.framework */,
 				DA4FFC88B1BCE6DA7D950FC0 /* Pods_TestExcerciseUITests.framework */,
 			);
-			name = Frameworks;
+			name = Dependencies;
 			sourceTree = "<group>";
 		};
 		92267EAB1DC667BE002EE91A /* CustomCells */ = {
@@ -219,7 +219,7 @@
 				9274B9561DC1592200447F2F /* TestExcerciseUITests */,
 				9274B9321DC1592100447F2F /* Products */,
 				6467B0C9A055F6C7E947E0A3 /* Pods */,
-				757A76A36AA017CA5F3AAC23 /* Frameworks */,
+				757A76A36AA017CA5F3AAC23 /* Dependencies */,
 			);
 			sourceTree = "<group>";
 		};
