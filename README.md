@@ -23,3 +23,6 @@ The information (posts and post details) are available offline. It's assumed tha
 
 App uses cocoa pods, Alamofire library and Realm Framework. 
 
+please use pod install
+
+
