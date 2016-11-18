@@ -42,6 +42,7 @@
 		92B75B601DC1987D0094C58F /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92B75B5C1DC1987D0094C58F /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92DB934A1DD14D1600C9F125 /* CustomNavigationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB93491DD14D1600C9F125 /* CustomNavigationAnimationController.swift */; };
 		92DB934C1DD2859B00C9F125 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB934B1DD2859B00C9F125 /* NavigationControllerDelegate.swift */; };
+		92DB934E1DD4C4DD00C9F125 /* CustomInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB934D1DD4C4DD00C9F125 /* CustomInteractionController.swift */; };
 		EF44D00B59E32B76675E9483 /* Pods_TestExcerciseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B7CF035864673A980104A4 /* Pods_TestExcerciseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		92B75B5C1DC1987D0094C58F /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		92DB93491DD14D1600C9F125 /* CustomNavigationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationAnimationController.swift; sourceTree = "<group>"; };
 		92DB934B1DD2859B00C9F125 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
+		92DB934D1DD4C4DD00C9F125 /* CustomInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInteractionController.swift; sourceTree = "<group>"; };
 		ACB153312AD07453C180FBEF /* Pods-TestExcerciseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestExcerciseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestExcerciseUITests/Pods-TestExcerciseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DA4FFC88B1BCE6DA7D950FC0 /* Pods_TestExcerciseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestExcerciseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB95B598593AB090B9F7280C /* Pods-TestExcercise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestExcercise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestExcercise/Pods-TestExcercise.debug.xcconfig"; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				92DB93491DD14D1600C9F125 /* CustomNavigationAnimationController.swift */,
+				92DB934D1DD4C4DD00C9F125 /* CustomInteractionController.swift */,
 			);
 			name = CustomAnimation;
 			sourceTree = "<group>";
@@ -536,7 +539,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which taylor >/dev/null; then\ntaylor -p ${PROJECT_DIR} -r xcode\nelse\necho \"Taylor not installed\"\nfi";
+			shellScript = "";
+			showEnvVarsInLog = 0;
 		};
 		B379A5DB4051387A0120F2DF /* Tailor */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -603,6 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92267EAD1DC6B8BD002EE91A /* ReachabilityManager.swift in Sources */,
+				92DB934E1DD4C4DD00C9F125 /* CustomInteractionController.swift in Sources */,
 				92DB934A1DD14D1600C9F125 /* CustomNavigationAnimationController.swift in Sources */,
 				922C18D01DC1A32100AEAD52 /* Comment.swift in Sources */,
 				9252CD621DC3302C0000ED36 /* NotificationExtension.swift in Sources */,

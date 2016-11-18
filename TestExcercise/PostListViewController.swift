@@ -15,7 +15,6 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
   
   let apiHelperInstance = APIHelper.sharedInstance
   var postLists: Array? = []
-  let customNavigationAnimationController = CustomNavigationAnimationController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,7 +45,7 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
         self?.postLists = posts
         self?.table.reloadData()
       }
-      self?.table.isHidden = posts.count == 0 ? true: false
+      self?.table.isHidden = posts.count == 0 ? true : false
       })
   }
   
@@ -95,15 +94,12 @@ class PostListViewController: UIViewController, UITableViewDataSource, UITableVi
         print("show alert post not detected")
         return
       }
-//      let destinationNavigationController = segue.destination as! UINavigationController
-//      (destinationNavigationController.topViewController as? PostDetailViewController)?.post = selectedPost
       let destinationNavigationController = segue.destination as! PostDetailViewController
       destinationNavigationController.post = selectedPost
-//      self.navigationController?.pushViewController(destinationNavigationController, animated: true)
     }
   }
   
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
     if keyPath == "isSyncInProgress" {
       self.checkStatus()
     }

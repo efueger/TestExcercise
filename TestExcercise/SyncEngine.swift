@@ -84,7 +84,7 @@ final class SyncEngine: NSObject {
   }
   
   func downloadDataForObjects(useUpadatedAtDate useUpdatedAtDate: Bool) -> Void {
-    networkManager.downloadRequestForClass(className: "Post", completion: {[weak self](value, error) in
+    networkManager.downloadRequestForClass(className: "Post", completion: {[weak self] (value, error) in
       guard let responseJson = value else {
         print(error)
         self?.handleError(error: error!)
