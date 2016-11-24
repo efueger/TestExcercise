@@ -1,7 +1,7 @@
 # TestExcercise
 Test Excercise
 
-This is a demo app to practise Swift 3.0 and custom navigation animations.
+This is a my first Swift project. A demo app to practise Swift 3.0 and custom navigation animations.
 
 From a high level point of view it consists of a list of posts, where each post has its own detail. App uses Viper architecture. 
 
