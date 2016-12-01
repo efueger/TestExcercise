@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import PromiseKit
 
 class DBManager {
   
@@ -50,20 +51,37 @@ class DBManager {
     }
   }
   
-  func saveJsonDataRecordsToDB(jsonRecords: [Object], success: () -> Void, fail: (NSError) -> Void) -> Void {
-    do {
-      let realm = try Realm()
+  /*
+   func saveJsonDataRecordsToDB(jsonRecords: [Object], success: () -> Void, fail: (NSError) -> Void) -> Void {
+   do {
+   let realm = try Realm()
+   realm.beginWrite()
+   for record in jsonRecords {
+   realm.add(record, update: true)
+   }
+   try realm.commitWrite()
+   } catch let error as NSError {
+   print("Something went wrong!")
+   fail(error)
+   // use the error object such as error.localizedDescription
+   }
+   success()
+   }*/
+  func saveJsonDataRecordsToDB(jsonRecords: [Object]) -> Promise<AnyObject> {
+    return Promise { fulfill, reject in
+      do {
+        let realm = try Realm()
         realm.beginWrite()
         for record in jsonRecords {
           realm.add(record, update: true)
         }
-      try realm.commitWrite()
+        try realm.commitWrite()
       } catch let error as NSError {
         print("Something went wrong!")
-        fail(error)
+        return reject(error)
         // use the error object such as error.localizedDescription
       }
-    success()
+      return fulfill("Success" as AnyObject)
     }
-  
+  }
 }
