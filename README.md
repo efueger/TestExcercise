@@ -21,7 +21,8 @@ Number of comments it has.
 Online / Offline Mode
 The information (posts and post details) are available offline. It's assumed that if it's the first time you are accessing the app, and you are offline, you shouldn't see anything.
 
-App uses cocoa pods, Alamofire library and Realm Framework. 
+# Notes
+App uses cocoa pods, Alamofire library, PromiseKit and Realm Framework. 
 
 please use pod install
 
